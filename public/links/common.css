@@ -52,6 +52,10 @@ table td{
     text-align: right;
 }
 
+input:matches([type="number"]){
+    width: 100px;
+}
+
 .container {
   margin: 0 auto;
   width: 98%;
@@ -72,4 +76,10 @@ table td{
 
 .footer{
   margin-top: 40pt;
+}
+
+@media screen and (max-width:480px){
+  input:matches([type="number"]){
+      width: 40px;
+  }
 }
