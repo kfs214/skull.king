@@ -3,17 +3,19 @@
 
 @section('content')
   <div class="content">
-    <form method="post" action="{{url()->full()}}">
+    <form method="post">
       @csrf
-      @for($i = 1; $i <= 6; $i++)
-        <tr>
-          <th>{{__('Player')}}{{$i}}</th>
-          <td><input type="text" name="players[{{$i}}]" placeholder="{{__('optional')}}" value="{{old('players' . $i)}}"></td>
-        </tr>
-        @error('players[' . $i . ']')
-          {{$message}}
-        @enderror
-      @endfor
+      <table>
+        @for($i = 1; $i <= 6; $i++)
+          <tr>
+            <th>{{__('Player')}}{{$i}}</th>
+            <td><input type="text" name="names[{{$i}}]" value="{{old("names.$i")}}"></td>
+          </tr>
+          @error("names.$i")
+            {{$message}}
+          @enderror
+        @endfor
+      </table>
       <button type="submit">{{__('Start')}}</button>
     </form>
   </div>

@@ -146,6 +146,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+      'names.*' => 'Player Name',
+    ],
 
 ];

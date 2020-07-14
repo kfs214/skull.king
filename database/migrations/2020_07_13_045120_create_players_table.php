@@ -18,6 +18,7 @@ class CreatePlayersTable extends Migration
             $table->integer('game_id');
             $table->tinyInteger('player_id');
             $table->string('name', 20);
+            $table->tinyInteger('bid')->nullable()->default(NULL);
             $table->timestamps();
         });
     }
