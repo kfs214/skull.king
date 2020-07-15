@@ -76,7 +76,7 @@ th.name{
 }
 
 input{
-    line-height: 2em;
+    font-size: 1em;
     width: 98%;
     max-width: 160px;
 }
