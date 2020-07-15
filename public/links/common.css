@@ -64,8 +64,9 @@ table th{
     min-width: 30px;
 }
 
-th.name{
+th.nowrap{
     min-width: 100px;
+    width: auto;
 }
 
 .scroll-table{

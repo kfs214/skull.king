@@ -7,7 +7,7 @@
         <table>
           <tr><th></th>
             @foreach ($players as $player)
-              <th class="name">{{$player->name}}</th>
+              <th class="nowrap">{{$player->name}}</th>
             @endforeach
           </tr>
           @foreach($rounds as $key => $round)

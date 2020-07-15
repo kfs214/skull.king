@@ -21,14 +21,14 @@
           @if($players->first()->bid !== NULL)
             <th>{{__('bid')}}</th>
           @endif
-          <th>{{__('current score')}}</th>
+          <th>{{__('score')}}</th>
         @else
           <th>{{__('result')}}</th>
         @endif
       </tr>
         @foreach($players as $player)
           <tr>
-            <th class="name">{{$player->name}}</th>
+            <th class="nowrap">{{$player->name}}</th>
             @if($player->bid !== NULL)
               <td>{{$player->bid}}</td>
             @endif

@@ -22,7 +22,7 @@
 
           @foreach($players as $player)
           <tr>
-            <th>{{$player->name}}</th>
+            <th class="nowrap">{{$player->name}}</th>
             @if($mode == 'bid')
               <td>
                 <input type="number" name="bid[{{$player->player_id}}]" value="{{old("bid.$player->player_id")}}">
