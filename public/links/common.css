@@ -1,4 +1,4 @@
-.theme, .theme li{
+.theme, .theme li, .scroll-table::-webkit-scrollbar-thumb{
     background-color: #5BAD92;
 }
 
@@ -71,7 +71,6 @@ th.name{
 .scroll-table{
   display: block;
   overflow-x: scroll;
-  white-space: nowrap;
   -webkit-overflow-scrolling: touch;
 }
 
