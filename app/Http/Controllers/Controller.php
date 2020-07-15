@@ -91,106 +91,131 @@ class Controller extends BaseController
 
         $game_id = Game::encode($game_id);
 
-        session(['mode' => 'master']);
-
-        return redirect(route('form', compact('game_id')), 303);
+        return redirect(route('bid', compact('game_id')), 303);
     }
 
 
-    public function form($game_id, Request $request){
+    public function bidForm($game_id){
         $game_id = Game::decode($game_id);
         $game_id_player = Game::encode($game_id, 'player');
 
         $players = Player::where('game_id', $game_id)->get();
 
-        $latest_round = Game::where('game_id', $game_id)->latest()->first();
+        $mode = 'bid';
+        $round = Game::where('game_id', $game_id)->latest()->first()->round ?? 0;
+        $round++;
 
-        if(isset($request->round)){
-            if($request->round){    //2〜10ラウンド、1ラウンドwin待ち
-                $players = Player::where('game_id', $game_id)->get();
+        return view('form', compact('mode', 'players', 'game_id_player', 'round'));
+    }
 
 
-                if(isset($request->bid)){
-                    $inputs = $request->validate([
-                      'round' => 'required|integer',
-                      'bid.*' => 'required|integer',
-                    ]);
+    public function bidStore($game_id, Request $request){
+        $game_id = Game::decode($game_id);
+        $game_id_player = Game::encode($game_id, 'player');
 
-                    session()->flash('bid', $inputs['bid']);
+        $players = Player::where('game_id', $game_id)->get();
 
-                    foreach($inputs['bid'] as $key => $bid){
-                        $player = Player::where('game_id', $game_id)
-                          ->where('player_id', $key)
-                          ->first();
+        $round = $request->round;
 
-                        $player->bid = $bid;
-                        $player->save();
-                    }
+        $inputs = $request->validate([
+            'bid.*' => 'required|integer',
+        ]);
 
-                    $round = $request->round;
-                    $mode = 'win';
+        session(['bid' => $inputs['bid']]);
 
-                    session()->forget('win');
-                    session()->forget('bonus');
+        foreach($inputs['bid'] as $key => $bid){
+            $player = Player::where('game_id', $game_id)
+              ->where('player_id', $key)
+              ->first();
 
-                    return view('form', compact('round', 'mode', 'players', 'game_id_player'));
-
-                }else{
-                    $inputs = $request->validate([
-                      'round' => 'required|integer',
-                      'win.*' => 'required|integer',
-                      'bonus.*' => 'nullable|integer',
-                    ]);
-
-                    session()->flash('win', $inputs['win']);
-                    session()->flash('bonus', $inputs['bonus']);
-
-                    $game = new Game;
-
-                    $round = $request->round;
-
-                    foreach($inputs['win'] as $key => $win){
-                        $bid = session("bid.$key");
-                        $score = $this->score($round, $bid, $win) + $inputs['bonus'][$key];
-
-                        $data[] = [
-                          'game_id' => $game_id,
-                          'round' => $round,
-                          'player_id' => $key,
-                          'score' => $score,
-                          'created_at' => now(),
-                          'updated_at' => now(),
-                        ];
-
-                        $player = Player::where('game_id', $game_id)
-                          ->where('player_id', $key)
-                          ->first();
-
-                        $player->bid = NULL;
-                        $player->save();
-                    }
-
-                    $game->insert($data);
-
-                    if($round == 10){
-                        return redirect(route('current', ['game_id' => $game_id_player]), 303);
-                    }
-
-                    $round++;
-                    $mode = 'bid';
-
-                    session()->forget('bid');
-
-                    return view('form', compact('round', 'mode', 'players', 'game_id_player'));
-
-                }
-            }
-        }else{  //第1ラウンドから開始
-            $round = 1;
-            $mode = 'bid';
-
-            return view('form', compact('round', 'mode', 'players', 'game_id_player'));
+            $player->bid = $bid;
+            $player->save();
         }
+
+        $mode = 'win';
+
+        session()->forget('win');
+        session()->forget('bonus');
+        session(compact('round'));
+
+
+        $game_id = Game::encode($game_id);
+
+        return redirect(route('win', compact('game_id')), 303);
+    }
+
+
+    public function winForm($game_id){
+        $game_id = Game::decode($game_id);
+        $game_id_player = Game::encode($game_id, 'player');
+
+        $players = Player::where('game_id', $game_id)->get();
+
+        $mode = 'win';
+        $round = Game::where('game_id', $game_id)->latest()->first()->round ?? 0;
+        $round++;
+
+        return view('form', compact('mode', 'players', 'game_id_player', 'round'));
+    }
+
+
+    public function winStore($game_id, Request $request){
+        $game_id = Game::decode($game_id);
+        $game_id_player = Game::encode($game_id, 'player');
+
+        $players = Player::where('game_id', $game_id)->get();
+
+        $round = $request->round;
+
+        $inputs = $request->validate([
+            'win' => 'required|array',
+            'win.*' => 'required|integer',
+            'bonus.*' => 'nullable|integer',
+        ]);
+
+        session()->flash('win', $inputs['win']);
+        session()->flash('bonus', $inputs['bonus']);
+
+        $game = new Game;
+
+        foreach($inputs['win'] as $key => $win){
+            $bid = session("bid.$key");
+            $score = $this->score($round, $bid, $win) + $inputs['bonus'][$key];
+
+            //echo "player_id:$key/bid:$bid/win:$win/score:$score<br>";
+
+            $data[] = [
+                'game_id' => $game_id,
+                'round' => $round,
+                'player_id' => $key,
+                'score' => $score,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+
+            $player = Player::where('game_id', $game_id)
+                ->where('player_id', $key)
+                ->first();
+
+            $player->bid = NULL;
+            $player->save();
+        }
+
+        $game->insert($data);
+
+        if($round == 10){
+            return redirect(route('current', ['game_id' => $game_id_player]), 303);
+        }
+
+        $round++;
+        $mode = 'bid';
+
+        session()->forget('bid');
+        session(compact('round'));
+
+        $game_id = Game::encode($game_id);
+
+        return redirect(route('bid', compact('game_id')), 303)->with('round', $round);
     }
 
 
@@ -201,7 +226,7 @@ class Controller extends BaseController
         $round = Game::where('game_id', $game_id)->latest()->first()->round ?? 1;
         $game_id = Game::encode($game_id, 'player');
 
-        return view('current', compact('players', 'round', 'game_id'));
+        return view('current', compact('players', 'round', 'game_id', 'round'));
     }
 
 

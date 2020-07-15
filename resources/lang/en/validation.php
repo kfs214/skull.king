@@ -148,6 +148,9 @@ return [
 
     'attributes' => [
       'names.*' => 'Player Name',
+      'bid.*' => 'bid',
+      'win.*' => 'win',
+      'bonus.*' => 'bonus',
     ],
 
 ];

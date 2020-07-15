@@ -19,8 +19,11 @@ Route::post('', 'Controller@index');
 Route::get('new', 'Controller@newForm')->name('new');
 Route::post('new', 'Controller@startNew');
 
-Route::get('master/{game_id}', 'Controller@form')->name('form');
-Route::post('master/{game_id}', 'Controller@form');
+Route::get('bid/{game_id}', 'Controller@bidForm')->name('bid');
+Route::post('bid/{game_id}', 'Controller@bidStore');
+
+Route::get('win/{game_id}', 'Controller@winForm')->name('win');
+Route::post('win/{game_id}', 'Controller@winStore');
 
 Route::get('{game_id}/current', 'Controller@current')->name('current');
 Route::get('{game_id}/log', 'Controller@log')->name('log');

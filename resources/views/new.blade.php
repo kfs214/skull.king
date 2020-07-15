@@ -8,7 +8,7 @@
       <table>
         @for($i = 1; $i <= 6; $i++)
           <tr>
-            <th>{{__('Player')}}{{$i}}</th>
+            <th class="name">{{__('Player')}}{{$i}}</th>
             <td><input type="text" name="names[{{$i}}]" value="{{old("names.$i")}}"></td>
           </tr>
           @error("names.$i")

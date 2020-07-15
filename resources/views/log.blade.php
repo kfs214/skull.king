@@ -3,10 +3,10 @@
 
 @section('content')
   <div class="content">
-    <table>
+    <table class="scroll-table">
       <tr><th></th>
         @foreach ($players as $player)
-          <th>{{$player->name}}</th>
+          <th class="name">{{$player->name}}</th>
         @endforeach
       </tr>
       @foreach($rounds as $key => $round)
@@ -19,7 +19,7 @@
       @endforeach
       <tr><th>{{__('current score')}}</th>
         @foreach ($players as $player)
-          <th>{{$player->score}}</th>
+          <td><b>{{$player->score}}</b></td>
         @endforeach
       </tr>
     </table>

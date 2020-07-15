@@ -2,13 +2,22 @@
 @section('title', __('Current Score'))
 
 @section('content')
-  <h2>{{__('Round:') . $round}}</h2>
+  @php
+    if($players->first()->bid !== NULL){
+        $round++;
+    }
+  @endphp
+  @if($round != 10)
+    <h2>{{__('Round:') . $round}}</h2>
+  @else
+    <h2>{{__('Result')}}</h2>
+  @endif
 
   <div class="content">
     <table>
       <tr>
         <th></th>
-        @if($round)
+        @if($round != 10)
           @if($players->first()->bid !== NULL)
             <th>{{__('bid')}}</th>
           @endif
@@ -19,8 +28,8 @@
       </tr>
         @foreach($players as $player)
           <tr>
-            <th>{{$player->name}}</th>
-            @if($player->bid)
+            <th class="name">{{$player->name}}</th>
+            @if($player->bid !== NULL)
               <td>{{$player->bid}}</td>
             @endif
             <td>{{$player->score}}</td>

@@ -25,20 +25,20 @@
             <th>{{$player->name}}</th>
             @if($mode == 'bid')
               <td>
-                <input type="number" name="bid[{{$player->player_id}}]" value="{{old("bid.$player->player_id", session("bid.$player->player_id"))}}">
+                <input type="number" name="bid[{{$player->player_id}}]" value="{{old("bid.$player->player_id")}}">
                 @error("bid.$player->player_id")
                   <br>{{$message}}
                 @enderror
               </td>
             @else
               <td>
-                <input type="number" name="win[{{$player->player_id}}]" value="{{old("win.$player->player_id", session("win.$player->player_id"))}}">
+                <input type="number" name="win[{{$player->player_id}}]" value="{{old("win.$player->player_id")}}">
                 @error("win.$player->player_id")
                   <br>{{$message}}
                 @enderror
               </td>
               <td>
-                <input type="number" name="bonus[{{$player->player_id}}]" value="{{old("bonus.$player->player_id", session("bonus.$player->player_id"))}}">
+                <input type="number" name="bonus[{{$player->player_id}}]" value="{{old("bonus.$player->player_id")}}">
                 @error("bonus.$player->player_id")
                   <br>{{$message}}
                 @enderror
@@ -47,10 +47,10 @@
           </tr>
         @endforeach
       </table>
-      @if(false && $round != 1 && $mode == 'win')
+      @if(false && session('round') != 1 && $mode == 'win')
         <button type="button" onClick="location.href='{{ url()->previous() }}'">{{__('Previous')}}</button>
       @endif
-      <button type="submit" name="sent" value="true">{{__('Next')}}</button>
+      <button type="submit" name="sent" value="sent">{{__('Next')}}</button>
     </form>
   </div>
   <div class="content">
