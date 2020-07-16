@@ -44,7 +44,7 @@
       {{__('To share this information, please send the URL of this page.')}}
     </p>
 
-    @if(session('mode') == 'master')
+    @if(session('masters_id') == $masters_id)
       {{__('Please close this tab to go back.')}}
     @endif
   </div>

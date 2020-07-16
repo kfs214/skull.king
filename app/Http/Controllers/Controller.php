@@ -90,6 +90,7 @@ class Controller extends BaseController
         }
 
         $game_id = Game::encode($game_id);
+        session(['masters_id' => $game_id]);  //マスターの場合の動作
 
         return redirect(route('bid', compact('game_id')), 303);
     }
@@ -221,23 +222,25 @@ class Controller extends BaseController
 
     public function current($game_id){
         $game_id = Game::decode($game_id, 'player');
+        $masters_id = Game::encode($game_id);
         $players = Player::where('game_id', $game_id)->get();
         $players = $players->sortByDesc('score');
-        $round = Game::where('game_id', $game_id)->latest()->first()->round ?? 1;
+        $round = Game::where('game_id', $game_id)->latest()->first()->round ?? 0;
         $game_id = Game::encode($game_id, 'player');
 
-        return view('current', compact('players', 'round', 'game_id', 'round'));
+        return view('current', compact('players', 'round', 'game_id', 'round','masters_id'));
     }
 
 
     public function log($game_id){
         $game_id = Game::decode($game_id, 'player');
+        $masters_id = Game::encode($game_id);
         $players = Player::where('game_id', $game_id)->get();
         $rounds = Game::where('game_id', $game_id)->orderBy('player_id')->get()->groupBy('round');
         $rounds = $rounds->sort();
         $game_id = Game::encode($game_id, 'player');
 
-        return view('log', compact('players', 'rounds', 'game_id'));
+        return view('log', compact('players', 'rounds', 'game_id','masters_id'));
     }
 
 
