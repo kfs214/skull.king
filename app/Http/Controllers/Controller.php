@@ -41,8 +41,8 @@ class Controller extends BaseController
       if(count($request->all())){
         $inputs = $request->validate([
           'bid.1' => 'required|integer',
-          'bid.*' => 'required_with:win.*',
-          'win.*' => 'required_with:bid.*',
+          'bid.*' => 'required_with:win.*|nullable|integer',
+          'win.*' => 'required_with:bid.*|nullable|integer',
           'round' => 'required',
          ]);
 
@@ -69,7 +69,7 @@ class Controller extends BaseController
         $inputs = $request->validate([
           'names' => 'required|array',
           'names.1' => 'required|string',
-          'names.*' => 'max:20',
+          'names.*' => 'max:20|nullable|string',
         ]);
 
         $game_id = $player->latest()->value('game_id') + 1 ?? 1;
@@ -222,7 +222,7 @@ class Controller extends BaseController
     public function current($game_id){
         $game_id = Game::decode($game_id, 'player');
         $players = Player::where('game_id', $game_id)->get();
-        $players->sortByDesc('score');
+        $players = $players->sortByDesc('score');
         $round = Game::where('game_id', $game_id)->latest()->first()->round ?? 1;
         $game_id = Game::encode($game_id, 'player');
 
@@ -234,6 +234,7 @@ class Controller extends BaseController
         $game_id = Game::decode($game_id, 'player');
         $players = Player::where('game_id', $game_id)->get();
         $rounds = Game::where('game_id', $game_id)->orderBy('player_id')->get()->groupBy('round');
+        $rounds = $rounds->sort();
         $game_id = Game::encode($game_id, 'player');
 
         return view('log', compact('players', 'rounds', 'game_id'));

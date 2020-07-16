@@ -26,7 +26,7 @@
     <h2>{{__('Calculation')}}</h2>
     <form method="post">
       @csrf
-      <label>{{__('Round:')}}<input type="number" name="round" value="{{ old('round') }}"></label>
+      <label>{{__('Round:')}}<input type="number" name="round" value="{{ old('round') }}" required {{$errors->any() ? '' : 'autofocus'}}></label>
       @error('round')
         <br>{{$message}}
       @enderror

@@ -25,14 +25,14 @@
             <th class="nowrap">{{$player->name}}</th>
             @if($mode == 'bid')
               <td>
-                <input type="number" name="bid[{{$player->player_id}}]" value="{{old("bid.$player->player_id")}}">
+                <input type="number" name="bid[{{$player->player_id}}]" value="{{old("bid.$player->player_id")}}" required {{$loop->first ? 'autofocus' : ''}}>
                 @error("bid.$player->player_id")
                   <br>{{$message}}
                 @enderror
               </td>
             @else
               <td>
-                <input type="number" name="win[{{$player->player_id}}]" value="{{old("win.$player->player_id")}}">
+                <input type="number" name="win[{{$player->player_id}}]" value="{{old("win.$player->player_id")}}" required {{$loop->first ? 'autofocus' : ''}}>
                 @error("win.$player->player_id")
                   <br>{{$message}}
                 @enderror
