@@ -10,6 +10,11 @@
       <input type="hidden" name="round" value="{{$round}}">
 
       <table>
+
+<!-- ====================
+    kozawaさんに敬意を表して
+    ==================== -->
+
           <tr>
             <th></th>
             @if($mode == 'bid')
@@ -25,14 +30,24 @@
             <th class="nowrap">{{$player->name}}</th>
             @if($mode == 'bid')
               <td>
-                <input type="number" name="bid[{{$player->player_id}}]" value="{{old("bid.$player->player_id")}}" required {{$loop->first ? 'autofocus' : ''}}>
+                <select name="bid[{{$player->player_id}}]">
+                  @for($i = 0; $i <= $round; $i++)
+                    <option value="{{$i}}" {{old("bid.$player->player_id") == $i ? 'selected' : ''}}>{{$i}}</option>
+                  @endfor
+                </select>
+                {{-- not used --}}
                 @error("bid.$player->player_id")
                   <br>{{$message}}
                 @enderror
               </td>
             @else
               <td>
-                <input type="number" name="win[{{$player->player_id}}]" value="{{old("win.$player->player_id")}}" required {{$loop->first ? 'autofocus' : ''}}>
+                <select name="win[{{$player->player_id}}]">
+                  @for($i = 0; $i <= $round; $i++)
+                    <option value="{{$i}}" {{old("win.$player->player_id") == $i ? 'selected' : ''}}>{{$i}}</option>
+                  @endfor
+                </select>
+                {{-- not used --}}
                 @error("win.$player->player_id")
                   <br>{{$message}}
                 @enderror

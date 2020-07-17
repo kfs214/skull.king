@@ -76,7 +76,7 @@ th.nowrap{
   -webkit-overflow-scrolling: touch;
 }
 
-input{
+input, select{
     font-size: 1em;
     width: 98%;
     max-width: 160px;

@@ -98,9 +98,16 @@ class Controller extends BaseController
 
     public function bidForm($game_id){
         $game_id = Game::decode($game_id);
+
         $game_id_player = Game::encode($game_id, 'player');
 
         $players = Player::where('game_id', $game_id)->get();
+
+        if($players->first()->bid !== NULL){
+          $game_id = Game::encode($game_id);
+
+          return redirect(route('win', compact('game_id')), 303);
+        }
 
         $mode = 'bid';
         $round = Game::where('game_id', $game_id)->latest()->first()->round ?? 0;
@@ -122,8 +129,6 @@ class Controller extends BaseController
             'bid.*' => 'required|integer',
         ]);
 
-        session(['bid' => $inputs['bid']]);
-
         foreach($inputs['bid'] as $key => $bid){
             $player = Player::where('game_id', $game_id)
               ->where('player_id', $key)
@@ -135,11 +140,6 @@ class Controller extends BaseController
 
         $mode = 'win';
 
-        session()->forget('win');
-        session()->forget('bonus');
-        session(compact('round'));
-
-
         $game_id = Game::encode($game_id);
 
         return redirect(route('win', compact('game_id')), 303);
@@ -148,9 +148,16 @@ class Controller extends BaseController
 
     public function winForm($game_id){
         $game_id = Game::decode($game_id);
-        $game_id_player = Game::encode($game_id, 'player');
 
         $players = Player::where('game_id', $game_id)->get();
+
+        if($players->first()->bid === NULL){
+          $game_id = Game::encode($game_id);
+
+          return redirect(route('bid', compact('game_id')), 303);
+        }
+
+        $game_id_player = Game::encode($game_id, 'player');
 
         $mode = 'win';
         $round = Game::where('game_id', $game_id)->latest()->first()->round ?? 0;
@@ -174,13 +181,14 @@ class Controller extends BaseController
             'bonus.*' => 'nullable|integer',
         ]);
 
-        session()->flash('win', $inputs['win']);
-        session()->flash('bonus', $inputs['bonus']);
-
         $game = new Game;
 
         foreach($inputs['win'] as $key => $win){
-            $bid = session("bid.$key");
+            $player = Player::where('game_id', $game_id)
+                ->where('player_id', $key)
+                ->first();
+
+            $bid = $player->bid;
             $score = $this->score($round, $bid, $win) + $inputs['bonus'][$key];
 
             //echo "player_id:$key/bid:$bid/win:$win/score:$score<br>";
@@ -193,10 +201,6 @@ class Controller extends BaseController
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
-
-            $player = Player::where('game_id', $game_id)
-                ->where('player_id', $key)
-                ->first();
 
             $player->bid = NULL;
             $player->save();
@@ -211,12 +215,9 @@ class Controller extends BaseController
         $round++;
         $mode = 'bid';
 
-        session()->forget('bid');
-        session(compact('round'));
-
         $game_id = Game::encode($game_id);
 
-        return redirect(route('bid', compact('game_id')), 303)->with('round', $round);
+        return redirect(route('bid', compact('game_id')), 303);
     }
 
 
