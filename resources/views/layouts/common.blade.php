@@ -10,7 +10,7 @@
 <body>
     <div class="header theme">
         <ul>
-          <li><a href="{{ route('new') }}">{{ __('New Game') }}</a></li>
+          <li><a href="{{ route('new') }}?openexternalbrowser=1">{{ __('New Game') }}</a></li>
             <li><a href="{{ route('simple') }}">{{ __('Simple') }}</a></li>
           @if(App::isLocale('en'))
             <li><a href="{{ route('language', ['lang' => 'ja']) }}">日本語</a></li>
