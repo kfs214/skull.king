@@ -18,7 +18,9 @@
               @endforeach
             </tr>
           @endforeach
-          <tr><th>{{__('current score')}}</th>
+          <tr><th>
+            {{$rounds->count() == 10 ? __('score') : __('current score')}}
+          </th>
             @foreach ($players as $player)
               <td><b>{{$player->score}}</b></td>
             @endforeach

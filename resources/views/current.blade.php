@@ -1,5 +1,9 @@
 @extends('layouts.common')
-@section('title', __('Current Score'))
+@if($round == 10 && $players->first()->bid === NULL)
+  @section('title', __('Result'))
+@else
+  @section('title', __('Current Score'))
+@endif
 
 @section('content')
   @php
@@ -7,23 +11,21 @@
         $round++;
     }
   @endphp
-  @if($round != 10)
+  @if($round != 10 || $players->first()->bid !== NULL)
     <h2>{{__('Round:') . $round}}</h2>
-  @else
-    <h2>{{__('Result')}}</h2>
   @endif
 
   <div class="content">
     <table>
       <tr>
         <th></th>
-        @if($round != 10)
+        @if($round == 10 && $players->first()->bid === NULL)
+          <th>{{__('result')}}</th>
+        @else
           @if($players->first()->bid !== NULL)
             <th>{{__('bid')}}</th>
           @endif
           <th>{{__('score')}}</th>
-        @else
-          <th>{{__('result')}}</th>
         @endif
       </tr>
         @foreach($players as $player)
