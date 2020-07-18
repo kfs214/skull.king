@@ -78,8 +78,22 @@ th.nowrap{
 
 input, select{
     font-size: 1em;
-    width: 98%;
+    width: 96%;
     max-width: 160px;
+    border-radius: 5px;
+	  border: solid 1px #5BAD92;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 2% 12px 2% 2%;
+    background-image: url(/links/triangle.png);
+    background-repeat: no-repeat;
+  	background-size: 12px 10px;
+  	background-position: right 10px center;
+  	background-color: #ffffff;
 }
 
 button{
