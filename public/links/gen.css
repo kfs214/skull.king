@@ -1,0 +1,30 @@
+.theme, .theme li, .scroll-table::-webkit-scrollbar-thumb{
+  background-color: #3E1E00;
+}
+
+.title{
+  color: #F7EFE3;
+}
+
+.content{
+  max-width: 500px;
+  width: 96%;
+  margin-left: 1%;
+  margin-right: 1%;
+  padding: 1%;
+  box-shadow: 0 0 10px 1px #3E1E00;
+}
+
+img{
+  box-shadow: 0 0 10px 1px #CCC;
+  width:100%;
+}
+
+a{
+  text-decoration: none;
+  color: #3E1E00;
+}
+
+a:hover{
+  opacity: 0.3;
+}

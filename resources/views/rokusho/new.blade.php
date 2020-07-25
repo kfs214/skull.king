@@ -1,4 +1,4 @@
-@extends('layouts.common')
+@extends('rokusho.layouts.common')
 @section('title', __('New Game'))
 
 @section('content')

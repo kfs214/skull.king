@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Rokusho;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -53,15 +53,15 @@ class Controller extends BaseController
           $scores[] = $this->score($inputs['round'], $bid, $inputs['win'][$key]);
         }
 
-        return view('simple', compact('scores'));
+        return view('rokusho.simple', compact('scores'));
       }
 
-        return view('simple');
+        return view('rokusho.simple');
     }
 
 
     public function newForm(){
-        return view('new');
+        return view('rokusho.new');
     }
 
 
@@ -92,7 +92,7 @@ class Controller extends BaseController
         $game_id = Game::encode($game_id);
         session(['masters_id' => $game_id]);  //マスターの場合の動作
 
-        return redirect(route('bid', compact('game_id')), 303);
+        return redirect(route('rokusho.bid', compact('game_id')), 303);
     }
 
 
@@ -106,14 +106,14 @@ class Controller extends BaseController
         if($players->first()->bid !== NULL){
           $game_id = Game::encode($game_id);
 
-          return redirect(route('win', compact('game_id')), 303);
+          return redirect(route('rokusho.win', compact('game_id')), 303);
         }
 
         $mode = 'bid';
         $round = Game::where('game_id', $game_id)->latest()->first()->round ?? 0;
         $round++;
 
-        return view('form', compact('mode', 'players', 'game_id_player', 'round'));
+        return view('rokusho.form', compact('mode', 'players', 'game_id_player', 'round'));
     }
 
 
@@ -142,7 +142,7 @@ class Controller extends BaseController
 
         $game_id = Game::encode($game_id);
 
-        return redirect(route('win', compact('game_id')), 303);
+        return redirect(route('rokusho.win', compact('game_id')), 303);
     }
 
 
@@ -154,7 +154,7 @@ class Controller extends BaseController
         if($players->first()->bid === NULL){
           $game_id = Game::encode($game_id);
 
-          return redirect(route('bid', compact('game_id')), 303);
+          return redirect(route('rokusho.bid', compact('game_id')), 303);
         }
 
         $game_id_player = Game::encode($game_id, 'player');
@@ -163,7 +163,7 @@ class Controller extends BaseController
         $round = Game::where('game_id', $game_id)->latest()->first()->round ?? 0;
         $round++;
 
-        return view('form', compact('mode', 'players', 'game_id_player', 'round'));
+        return view('rokusho.form', compact('mode', 'players', 'game_id_player', 'round'));
     }
 
 
@@ -209,7 +209,7 @@ class Controller extends BaseController
         $game->insert($data);
 
         if($round == 10){
-            return redirect(route('current', ['game_id' => $game_id_player]), 303);
+            return redirect(route('rokusho.current', ['game_id' => $game_id_player]), 303);
         }
 
         $round++;
@@ -217,7 +217,7 @@ class Controller extends BaseController
 
         $game_id = Game::encode($game_id);
 
-        return redirect(route('bid', compact('game_id')), 303);
+        return redirect(route('rokusho.bid', compact('game_id')), 303);
     }
 
 
@@ -229,7 +229,7 @@ class Controller extends BaseController
         $round = Game::where('game_id', $game_id)->latest()->first()->round ?? 0;
         $game_id = Game::encode($game_id, 'player');
 
-        return view('current', compact('players', 'round', 'game_id', 'round','masters_id'));
+        return view('rokusho.current', compact('players', 'round', 'game_id', 'round','masters_id'));
     }
 
 
@@ -241,7 +241,7 @@ class Controller extends BaseController
         $rounds = $rounds->sort();
         $game_id = Game::encode($game_id, 'player');
 
-        return view('log', compact('players', 'rounds', 'game_id','masters_id'));
+        return view('rokusho.log', compact('players', 'rounds', 'game_id','masters_id'));
     }
 
 

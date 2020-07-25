@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Skull King'),
 
+    'index' => 'KFS214作品一覧',
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

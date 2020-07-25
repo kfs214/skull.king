@@ -1,4 +1,4 @@
-@extends('layouts.common')
+@extends('rokusho.layouts.common')
 @section('title', __('Log'))
 
 @section('content')
@@ -27,7 +27,7 @@
           </tr>
         </table>
       </div>
-      <a href="{{route('current', ['game_id' => $game_id])}}">{{__('Show the current scores.')}}</a>
+      <a href="{{route('rokusho.current', ['game_id' => $game_id])}}">{{__('Show the current scores.')}}</a>
   </div>
 
   <div class="content">

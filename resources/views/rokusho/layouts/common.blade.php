@@ -10,12 +10,12 @@
 <body>
     <div class="header theme">
         <ul>
-          <li><a href="{{ route('new') }}?openexternalbrowser=1">{{ __('New Game') }}</a></li>
-            <li><a href="{{ route('simple') }}">{{ __('Simple') }}</a></li>
+          <li><a href="{{ route('rokusho.new') }}?openexternalbrowser=1">{{ __('New Game') }}</a></li>
+            <li><a href="{{ route('rokusho.simple') }}">{{ __('Simple') }}</a></li>
           @if(App::isLocale('en'))
-            <li><a href="{{ route('language', ['lang' => 'ja']) }}">日本語</a></li>
+            <li><a href="{{ route('rokusho.language', ['lang' => 'ja']) }}">日本語</a></li>
           @else
-            <li><a href="{{ route('language', ['lang' => 'en']) }}">English</a></li>
+            <li><a href="{{ route('rokusho.language', ['lang' => 'en']) }}">English</a></li>
           @endif
         </ul>
     </div>

@@ -96,8 +96,15 @@ select {
   	background-color: #ffffff;
 }
 
-button{
+textarea, button, input, select{
     font-size: 1em;
+}
+
+a, a:hover, button, button:hover, li, li:hover{
+  -webkit-transition: 0.3s ease-out;
+  -moz-transition: 0.3s ease-out;
+  -o-transition: 0.3s ease-out;
+  transition: 0.3s ease-out;
 }
 
 .container {
@@ -111,14 +118,47 @@ button{
 }
 
 .header,.footer{
-  width: 100%;
   font-size: 0.8em;
 }
 
 .header{
   margin-bottom: 20pt;
+  width: 98%;
+  padding: 1%;
 }
 
 .footer{
+  width: 100%;
   margin-top: 40pt;
+}
+
+.title{
+  font-size: 1.5em;
+  padding: 0.3em 0.3em 0.3em 0;
+  display: inline-block;
+}
+
+.flex-container{
+  display: flex;
+  flex-wrap:wrap;
+}
+
+.header ul{
+  margin: 0;
+  padding: 0;
+}
+
+.header li{
+  text-align:center;
+  border-left:1px solid white;
+  padding: 0.3em;
+}
+
+.header li, .header a{
+  list-style: none;
+  text-decoration: none;
+}
+
+.header ul{
+  justify-content: flex-end;
 }

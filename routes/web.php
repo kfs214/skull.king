@@ -13,19 +13,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('', 'Controller@index')->name('simple');
-Route::post('', 'Controller@index');
+Route::get('', function(){
+  return view('index');
+})->name('index');
 
-Route::get('new', 'Controller@newForm')->name('new');
-Route::post('new', 'Controller@startNew');
+Route::prefix('rokusho')->as('rokusho.')->namespace('Rokusho')->group(function(){
+  Route::get('', 'Controller@index')->name('simple');
+  Route::post('', 'Controller@index');
 
-Route::get('bid/{game_id}', 'Controller@bidForm')->name('bid');
-Route::post('bid/{game_id}', 'Controller@bidStore');
+  Route::get('new', 'Controller@newForm')->name('new');
+  Route::post('new', 'Controller@startNew');
 
-Route::get('win/{game_id}', 'Controller@winForm')->name('win');
-Route::post('win/{game_id}', 'Controller@winStore');
+  Route::get('bid/{game_id}', 'Controller@bidForm')->name('bid');
+  Route::post('bid/{game_id}', 'Controller@bidStore');
 
-Route::get('{game_id}/current', 'Controller@current')->name('current');
-Route::get('{game_id}/log', 'Controller@log')->name('log');
+  Route::get('win/{game_id}', 'Controller@winForm')->name('win');
+  Route::post('win/{game_id}', 'Controller@winStore');
 
-Route::get('language/{lang}', 'Controller@language')->name('language');
+  Route::get('{game_id}/current', 'Controller@current')->name('current');
+  Route::get('{game_id}/log', 'Controller@log')->name('log');
+
+  Route::get('language/{lang}', 'Controller@language')->name('language');
+});

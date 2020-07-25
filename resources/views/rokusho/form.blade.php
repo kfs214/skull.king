@@ -1,4 +1,4 @@
-@extends('layouts.common')
+@extends('rokusho.layouts.common')
 @section('title', __('Master'))
 
 @section('content')
@@ -69,7 +69,7 @@
     </form>
   </div>
   <div class="content">
-    <a href="{{route('current', ['game_id' => $game_id_player])}}" target="_blank">{{__('Show the current scores.')}}</a>
-    <a href="{{route('log', ['game_id' => $game_id_player])}}" target="_blank">{{__('Show the log.')}}</a>
+    <a href="{{route('rokusho.current', ['game_id' => $game_id_player])}}" target="_blank">{{__('Show the current scores.')}}</a>
+    <a href="{{route('rokusho.log', ['game_id' => $game_id_player])}}" target="_blank">{{__('Show the log.')}}</a>
   </div>
 @endsection

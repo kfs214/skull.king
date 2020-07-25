@@ -1,4 +1,4 @@
-@extends('layouts.common')
+@extends('rokusho.layouts.common')
 @if($round == 10 && $players->first()->bid === NULL)
   @section('title', __('Result'))
 @else
@@ -38,7 +38,7 @@
           </tr>
         @endforeach
     </table>
-    <a href="{{route('log', ['game_id' => $game_id])}}">{{__('Show the log.')}}</a>
+    <a href="{{route('rokusho.log', ['game_id' => $game_id])}}">{{__('Show the log.')}}</a>
   </div>
 
   <div class="content">
