@@ -38,13 +38,15 @@
       <p><u>HAjizomeを使ってみる</u></p>
     </a>
 
-    <a class="content" href="https://kfs214.net" title="ふんどし王子事典—KFS214">
-      <h2>ふんどし王子事典—KFS214</h2>
-      <h3>wordpressで作成した事典</h3>
-      <img src="{{ asset('/links/kfs214.jpeg') }}">
-      <p>「いいな」と思ったものに、「いいね」と言ってくれる人がいると嬉しい。私が見た・聞いた・感じた「いいな」を集めて並べた事典。（自分の文章を「いいな」と言ってしまうおこがましさはご愛嬌）</p>
-      <p><u>ふんどし王子事典—KFS214を見てみる</u></p>
-    </a>
+    @if($request->shown)
+      <a class="content" href="https://kfs214.net" title="ふんどし王子事典—KFS214">
+        <h2>ふんどし王子事典—KFS214</h2>
+        <h3>wordpressで作成した事典</h3>
+        <img src="{{ asset('/links/kfs214.jpeg') }}">
+        <p>「いいな」と思ったものに、「いいね」と言ってくれる人がいると嬉しい。私が見た・聞いた・感じた「いいな」を集めて並べた事典。（自分の文章を「いいな」と言ってしまうおこがましさはご愛嬌）</p>
+        <p><u>ふんどし王子事典—KFS214を見てみる</u></p>
+      </a>
+    @endif
   </div>
 
   <div class="footer">

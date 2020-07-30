@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('', function(){
-  return view('index');
+Route::get('', function(Request $request){
+  return view('index', compact('request'));
 })->name('index');
 
 Route::prefix('rokusho')->as('rokusho.')->namespace('Rokusho')->group(function(){
