@@ -11,7 +11,7 @@
     <div class="header theme">
         <ul>
           <li><a href="{{ route('rokusho.new') }}?openexternalbrowser=1">{{ __('New Game') }}</a></li>
-            <li><a href="{{ route('rokusho.simple') }}">{{ __('Simple') }}</a></li>
+          <li><a href="{{ route('rokusho.simple') }}">{{ __('Simple') }}</a></li>
           @if(App::isLocale('en'))
             <li><a href="{{ route('rokusho.language', ['lang' => 'ja']) }}">日本語</a></li>
           @else

@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://utilities.kfs214.net/skull.king/'),
+    'url' => env('APP_URL', 'https://utilities.kfs214.net/rokusho/'),
 
     'asset_url' => env('ASSET_URL', null),
 
