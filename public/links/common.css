@@ -1,87 +1,92 @@
-.theme, .theme li, .scroll-table::-webkit-scrollbar-thumb{
-    background-color: #5BAD92;
+.theme,
+.theme li,
+.scroll-table::-webkit-scrollbar-thumb {
+    background-color: #5bad92;
 }
 
 html {
-  font-size: 13pt;
-  font-family: 'Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','Yu Gothic UI',sans-serif;
+    font-size: 13pt;
+    font-family: "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3",
+        "Yu Gothic UI", sans-serif;
 }
 
 body {
-  margin: 0;
+    margin: 0;
 }
 
 h1 {
-  font-size: 1.5em;
+    font-size: 1.5em;
 }
 
 h2 {
-  font-size: 1.2em;
+    font-size: 1.2em;
 }
 
 ul {
-    display:table;
-    table-layout:fixed;
-    width:100%;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
     padding: 0px;
 }
 ul li {
-    display:table-cell;
-    vertical-align:middle;
-    text-align:center;
-    border-left:1px solid white;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    border-left: 1px solid white;
     padding: 0.3em;
 }
 ul li:first-child {
-    border:none;
+    border: none;
 }
 ul li a {
-    display:block;
-    text-decoration:none;
-    color:white;
+    display: block;
+    text-decoration: none;
+    color: white;
 }
 
-table{
-  border-collapse: collapse;
-  border-spacing: 0;
-  margin-bottom: 40px;
-  width: 100%;
-  max-width: 400px;
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 40px;
+    width: 100%;
+    max-width: 400px;
 }
 
-table th,table td{
-  padding: 2pt 5pt;
-  vertical-align:top;
+table th,
+table td {
+    padding: 2pt 5pt;
+    vertical-align: top;
 }
 
-table td{
+table td {
     text-align: right;
     min-width: 30px;
 }
 
-table th{
+table th {
     width: 25%;
     max-width: 200px;
     min-width: 30px;
 }
 
-th.nowrap{
+th.nowrap {
     min-width: 100px;
     width: auto;
 }
 
-.scroll-table{
-  display: block;
-  overflow-x: scroll;
-  -webkit-overflow-scrolling: touch;
+.scroll-table {
+    display: block;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 
-input, select{
+input,
+select {
     font-size: 1em;
     width: 96%;
     max-width: 160px;
     border-radius: 5px;
-	  border: solid 1px #5BAD92;
+    border: solid 1px #5bad92;
 }
 
 select {
@@ -91,74 +96,84 @@ select {
     padding: 2% 12px 2% 2%;
     background-image: url(/links/triangle.png);
     background-repeat: no-repeat;
-  	background-size: 12px 10px;
-  	background-position: right 10px center;
-  	background-color: #ffffff;
+    background-size: 12px 10px;
+    background-position: right 10px center;
+    background-color: #ffffff;
 }
 
-textarea, button, input, select{
+textarea,
+button,
+input,
+select {
     font-size: 1em;
 }
 
-a, a:hover, button, button:hover, li, li:hover{
-  -webkit-transition: 0.3s ease-out;
-  -moz-transition: 0.3s ease-out;
-  -o-transition: 0.3s ease-out;
-  transition: 0.3s ease-out;
+a,
+a:hover,
+button,
+button:hover,
+li,
+li:hover {
+    -webkit-transition: 0.3s ease-out;
+    -moz-transition: 0.3s ease-out;
+    -o-transition: 0.3s ease-out;
+    transition: 0.3s ease-out;
 }
 
 .container {
-  margin: 0 auto;
-  width: 98%;
+    margin: 0 auto;
+    width: 98%;
 }
 
 .content {
-  margin: 0 auto 20pt auto;
-  width: 100%;
+    margin: 0 auto 20pt auto;
+    width: 100%;
 }
 
-.header,.footer{
-  font-size: 0.8em;
+.header,
+.footer {
+    font-size: 0.8em;
 }
 
-.header{
-  margin-bottom: 20pt;
-  width: 98%;
-  padding: 1%;
+.header {
+    margin-bottom: 20pt;
+    width: 98%;
+    padding: 1%;
 }
 
-.footer{
-  width: 100%;
-  margin-top: 40pt;
+.footer {
+    width: 100%;
+    margin-top: 40pt;
 }
 
-.title{
-  font-size: 1.5em;
-  padding: 0.3em 0.3em 0.3em 0;
-  display: inline-block;
+.title {
+    font-size: 1.5em;
+    padding: 0.3em 0.3em 0.3em 0;
+    display: inline-block;
 }
 
-.flex-container{
-  display: flex;
-  flex-wrap:wrap;
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.header ul{
-  margin: 0;
-  padding: 0;
+.header ul {
+    margin: 0;
+    padding: 0;
 }
 
-.header li{
-  text-align:center;
-  border-left:1px solid white;
-  padding: 0.3em;
+.header li {
+    text-align: center;
+    border-left: 1px solid white;
+    padding: 0.3em;
 }
 
-.header li, .header a{
-  list-style: none;
-  text-decoration: none;
+.header li,
+.header a {
+    list-style: none;
+    text-decoration: none;
 }
 
-.header ul{
-  justify-content: flex-end;
+.header ul {
+    justify-content: flex-end;
 }
