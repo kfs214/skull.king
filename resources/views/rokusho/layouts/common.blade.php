@@ -22,6 +22,15 @@
     </div>
 
     <div class="container">
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">{{ __('This web site is going to be closed!') }}</h4>
+            <p>{{ __('After 2023, all functions will be unavailable') }}<br />
+                {{ __('including page access.') }}</p>
+            <p>{{ __('Thank you for using, and and we look forward to seeing you again.') }}<br />
+                {{ __('GitHub: ') }}<a href="https://github.com/kfs214/" target="_blank">kfs214</a>{{ __(' :)') }}
+            </p>
+        </div>
+
         <h1>@yield('title')</h1>
 
         @yield('content')
